@@ -1,17 +1,15 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
+ import ReactDOM from 'react-dom';
+ import './index.css';
+ import App from './App';
+ import ApolloClient from 'apollo-client';
+ import { HttpLink } from 'apollo-link-http';
+ import { ApolloLink, concat } from 'apollo-link';
+ import { ApolloProvider } from 'react-apollo';
+ import { InMemoryCache } from 'apollo-cache-inmemory';
 
-import ApolloClient from 'apollo-client';
-import { HttpLink } from 'apollo-link-http';
-import { ApolloLink, concat } from 'apollo-link';
-import { ApolloProvider } from 'react-apollo';
-import { InMemoryCache } from 'apollo-cache-inmemory';
-
-import { graphql } from 'react-apollo';
-import gql from 'graphql-tag';
+ import { graphql } from 'react-apollo';
+ import gql from 'graphql-tag';
 
 
 const httpLink = new HttpLink({ uri: 'https://api-test-store-vix.myshopify.com/api/graphql' });
@@ -36,11 +34,10 @@ const authMiddleware = new ApolloLink((operation, forward) => {
 // create a provider to connect the ApolloClient to your react component tree.
 
 ReactDOM.render((
-  <apolloprovider client="{client}">
-    <app>
-    </app></apolloprovider>
+  <ApolloProvider client={client}>
+    <App />
+  </ApolloProvider>
   ),
   document.getElementById('root')
 );
 
-registerServiceWorker();
