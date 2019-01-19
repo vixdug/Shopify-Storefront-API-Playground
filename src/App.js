@@ -26,9 +26,10 @@ class App extends Component {
 
           {productsToDisplay.edges.map((el, i)=> {
             return(
-              <div key="{i}">
-                <img src="{el.node.images.edges[0].node.src}"/>
+              <div key={i}>
+                <img src={el.node.images.edges[0].node.src} height="302" width="302"/>
                 <h2>{el.node.title}</h2>
+                <h4> {el.node.description}</h4>
               </div>
             )
           })}
@@ -44,7 +45,7 @@ const HOME_QUERY = gql`
     shop {
       name
       description
-      products(first:20) {
+      products(first:10, query:"tag:'local'") {
         pageInfo {
           hasNextPage
           hasPreviousPage
@@ -53,6 +54,7 @@ const HOME_QUERY = gql`
           node {
             id
             title
+            description
             images(first: 1) {
               edges {
                 node {
