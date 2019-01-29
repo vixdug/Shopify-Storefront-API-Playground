@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
+import Product from './Product.js';
 
 import { graphql } from 'react-apollo';
 import gql from 'graphql-tag';
@@ -22,15 +23,10 @@ class App extends Component {
     const productsToDisplay = this.props.shopData.shop.products
     return (
       <div classname="App">
-        <div className="products-grid">
-
+        <div classname="products-grid">
           {productsToDisplay.edges.map((el, i)=> {
             return(
-              <div key={i}>
-                <img src={el.node.images.edges[0].node.src} height="302" width="302"/>
-                <h2>{el.node.title}</h2>
-                <h4> {el.node.description}</h4>
-              </div>
+              <Product key={i} product={el.node}></Product>
             )
           })}
         </div>
@@ -54,6 +50,11 @@ const HOME_QUERY = gql`
           node {
             id
             title
+            options{
+            id 
+            name
+            values
+          }
             description
             images(first: 1) {
               edges {
