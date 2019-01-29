@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import Product from './Product.js';
+import Collection from './Collection.js';
 
 import { graphql } from 'react-apollo';
 import gql from 'graphql-tag';
@@ -30,6 +31,7 @@ class App extends Component {
             )
           })}
         </div>
+      <Collection />
       </div>
     );
   }

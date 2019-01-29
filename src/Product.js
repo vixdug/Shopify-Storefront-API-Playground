@@ -1,6 +1,12 @@
 import React, { Component } from 'react';
 
 class Product extends Component {
+
+  constructor() {
+    super();
+    this.state = {};
+  }
+
   render() {
     const {images, title, description, options} = this.props.product
     const productOptions = options.map((option, i) => {
